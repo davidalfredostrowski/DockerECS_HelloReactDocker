@@ -1,0 +1,18 @@
+FROM node:14 AS build
+
+WORKDIR /app
+
+COPY .babelrc ./
+COPY package*.json ./
+COPY src src
+
+RUN npm install
+
+FROM node:14
+
+WORKDIR /app
+
+COPY . .
+
+EXPOSE 3000
+CMD [ "npm", "run","client" ]
